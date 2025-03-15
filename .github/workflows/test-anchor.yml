@@ -13,26 +13,22 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 9
-          run_install: false
+      - name: Install Bun
+        run: curl -fsSL https://bun.sh/install | bash
+        env:
+          BUN_INSTALL: /home/runner/.bun
 
-      - name: Install Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: 'pnpm'
+      - name: Configure Bun
+        run: echo 'export PATH="$BUN_INSTALL/bin:$PATH"' >> $GITHUB_ENV
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: bun install
 
       - uses: metadaoproject/setup-anchor@v2
         with:
           anchor-version: '0.30.1'
           node-version: '20'
-          solana-cli-version: '1.18.9'
+          solana-cli-version: '1.18.17'
 
       - name: Generate new keypair
         run: solana-keygen new --no-bip39-passphrase
@@ -43,8 +39,8 @@ jobs:
       - name: Check solana config
         run: solana config get
 
-      - run: pnpm run anchor build
+      - run: bun run anchor build
         shell: bash
 
-      - run: pnpm run anchor test
+      - run: bun run anchor test
         shell: bash
