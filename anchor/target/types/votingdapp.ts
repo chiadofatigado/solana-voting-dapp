@@ -5,7 +5,7 @@
  * IDL can be found at `target/idl/votingdapp.json`.
  */
 export type Votingdapp = {
-  "address": "coUnmi3oBUtwtd9fjeAvSsJssXh5A5xyPbhpewyzRVF",
+  "address": "ETb4VdQGnJan1RVdi7MnDrB4WuiawjtqZosAa5XaD3w",
   "metadata": {
     "name": "votingdapp",
     "version": "0.1.0",

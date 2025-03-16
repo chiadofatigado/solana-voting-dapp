@@ -14,19 +14,21 @@ describe('Voting', () => {
 
   let context;
   let provider;
-  let votingProgram: Program<Votingdapp>;
+  anchor.setProvider(anchor.AnchorProvider.env());
+  let votingProgram = anchor.workspace.Votingdapp as Program<Votingdapp>;
   const pollId = new anchor.BN(1);
   const candidateName1 = 'Burger';
   const candidateName2 = 'Pizza';
-
+  console.log("IDL Program ID:", votingAddressProgramId.toString());
+  console.log("Workspace Program ID:", votingProgram.programId.toString());
   beforeAll(async () => {
-    context = await startAnchor("", [{ name: "votingdapp", programId: votingAddressProgramId }], []);
+    /* context = await startAnchor("", [{ name: "votingdapp", programId: votingAddressProgramId }], []);
     provider = new BankrunProvider(context);
     
     votingProgram = new Program<Votingdapp>(
       IDL as Votingdapp,
       provider
-    );
+    ); */
     
   })
 
